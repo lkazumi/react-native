@@ -12,14 +12,16 @@ import {View,
 
 export default function login(){
 
+  //Valor inserido na animacao
   const [offset] = useState(new Animated.ValueXY({x: 0, y: 80}));
   const [opacity] = useState(new Animated.Value(0));
   const [logo] = useState(new Animated.ValueXY({x: 130, y: 155}))
 
+  //Animacao dos campos input e se teclado esta aberto ou fechado
   useEffect(()=> {
     keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', keyboardDidShow);
     keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', keyboardDidHide);
-
+   
     Animated.parallel([
       Animated.spring(offset.y,{
         toValue: 0,
@@ -33,8 +35,8 @@ export default function login(){
     ]).start();
   }, [])
 
+  //Diminui logo ao abrir teclado
   function keyboardDidShow(){
-
     Animated.parallel([
       Animated.timing(logo.x, {
         toValue: 60,
@@ -47,8 +49,8 @@ export default function login(){
     ]).start();
   }
 
+  //Aumenta logo ao fechar teclado
   function keyboardDidHide(){
- 
     Animated.parallel([
       Animated.timing(logo.x, {
         toValue: 130,
@@ -117,6 +119,7 @@ export default function login(){
   );
 }
 
+//Estilos 
 const styles = StyleSheet.create({
   background:{
     flex:1,
