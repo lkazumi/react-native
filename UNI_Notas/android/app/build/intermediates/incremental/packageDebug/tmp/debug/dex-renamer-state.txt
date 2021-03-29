@@ -1,0 +1,4 @@
+#Mon Nov 30 21:52:37 BRT 2020
+base.0=E\:\\Users\\Kazumi\\Documents\\APP\\React_Native\\UNI_Notas\\android\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
