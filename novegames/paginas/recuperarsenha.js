@@ -8,7 +8,8 @@ import {View,
   StyleSheet, 
   Text,
   Animated,
-  Keyboard
+  Keyboard,
+  Alert
 } from 'react-native';
 
 export default function login(){
@@ -40,11 +41,11 @@ export default function login(){
   function keyboardDidShow(){
     Animated.parallel([
       Animated.timing(logo.x, {
-        toValue: 20,
+        toValue: 70,
         duration: 100,
       }),
       Animated.timing(logo.y, {
-        toValue: 35,
+        toValue: 95,
         duration: 100,
       })
     ]).start();
@@ -67,7 +68,7 @@ export default function login(){
   
 
   return(
-    <KeyboardAvoidingView style={styles.background}>
+    <KeyboardAvoidingView style={styles.background}> 
       <View style={styles.containerLogo}>
         <Animated.Image
           style={{
@@ -87,47 +88,28 @@ export default function login(){
             ]
           }
         ]}
-      >
-        <TextInput
-          style={styles.input}
-          placeholder="Nome"
-          autoCorrect={false}
-          onChangeText={()=> {}}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          autoCorrect={false}
-          onChangeText={()=> {}}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Senha"
-          autoCorrect={false}
-          onChangeText={()=> {}}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Confirmar senha"
-          autoCorrect={false}
-          onChangeText={()=> {}}
-        />       
-          <View style={styles.checkboxContainer}>
-            <CheckBox
-              value={false}
-              onValueChange={()=>{false}}
-              style={styles.checkbox}
-            />
-            <Text style={styles.checkboxText}>Deseja postar noticias?</Text>
-          </View>
-        <TouchableOpacity style={styles.btnSubmit}>
-          <Text 
-            style={styles.submitText}
+      >     
+        <View style={styles.containerSenha}>
+          <Text style={styles.titleText}>
+            Esqueci a senha
+          </Text>
+          <Text style={styles.subtitleText}>
+            Insira seu email ou nome de usuário.
+          </Text>
+          <TextInput
+            style={styles.input}
+            placeholder="E-mail ou nome de usuário"
+            autoCorrect={false}
+            onChangeText={()=> {}}
+          />
+          <TouchableOpacity style={styles.btnSubmit}
+            onPress={() => Alert.alert('Redefinir senha','Link para alteração da senha enviado por e-mail.')}
           >
-            Criar conta
-          </Text >
-        </TouchableOpacity>
-        
+            <Text style={styles.submitText}>
+              Redefinir senha
+            </Text>
+          </TouchableOpacity>
+        </View>
       </Animated.View>
     </KeyboardAvoidingView>
   );
@@ -143,8 +125,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   containerLogo:{
-    flex:1,
-    justifyContent: 'center'
+    flex:0,
+    justifyContent: 'center',
+    marginTop: 20,
+    backgroundColor: 'black'
   },
   container:{
     flex:1,
@@ -186,5 +170,19 @@ const styles = StyleSheet.create({
     width: '80%',
     marginBottom:15,
     color: '#222',
+  },
+  titleText:{
+    fontSize: 20,
+    marginTop: 15,
+  },
+  subtitleText:{
+    marginTop:10,
+    marginBottom: 10,
+  },
+  containerSenha:{
+    flex:1,
+    alignItems:'center',
+    justifyContent: 'flex-start',
+    width: '100%',
   }
 });
