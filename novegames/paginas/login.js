@@ -113,6 +113,14 @@ export default function login(){
             Criar conta gratuita
           </Text>
         </TouchableOpacity>
+
+        <TouchableOpacity style={styles.btnRecover}>
+          <Text
+            style={styles.recoverText}
+          >
+            Esqueceu sua senha?
+          </Text>
+        </TouchableOpacity>
         
       </Animated.View>
     </KeyboardAvoidingView>
@@ -160,9 +168,16 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
   btnRegister:{
-    marginTop: 10,
+    marginTop: 15,
   },
   registerText:{
+    color: '#00204a'
+  },
+  btnRecover:{
+    marginLeft: -150,
+    marginTop: 50,
+  },
+  recoverText:{
     color: '#00204a'
   }
 });
