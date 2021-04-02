@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
   },
   btnRecover:{
     marginLeft: -150,
-    marginTop: 50,
+    marginTop: 30,
   },
   recoverText:{
     color: '#00204a'
