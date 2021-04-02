@@ -90,7 +90,7 @@ export default function login(){
       >
         <TextInput
           style={styles.input}
-          placeholder="Nome"
+          placeholder="Usuário"
           autoCorrect={false}
           onChangeText={()=> {}}
         />
