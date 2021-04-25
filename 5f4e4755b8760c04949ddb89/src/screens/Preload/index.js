@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { Container, LoadingIcon } from './style';
+import { Container, LoadingIcon } from './styles';
 import AsyncStorage from '@react-native-community/async-storage';
 import { useNavigation } from '@react-navigation/native';
 
@@ -10,10 +10,7 @@ import BarberLogo from '../../assets/barber.svg';
 
 export default () => {
 
-    //Manda informações para o context
-    const { dispatch :  userDispatch } = useContext(UserContext);
-
-    //Instancia Navigation para utilizar nos metodos
+    const { dispatch: userDispatch } = useContext(UserContext);
     const navigation = useNavigation();
 
     useEffect(()=>{
@@ -23,10 +20,8 @@ export default () => {
                 let res = await Api.checkToken(token);
                 if(res.token) {
 
-                    //Salva token do usuário
                     await AsyncStorage.setItem('token', res.token);
 
-                    //Salva informação do avatar/imagem  no context
                     userDispatch({
                         type: 'setAvatar',
                         payload:{
@@ -34,21 +29,19 @@ export default () => {
                         }
                     });
 
-                    //Envia usuário para tela principal apos o login
                     navigation.reset({
-                        routes:[{name: 'MainTab'}]
+                        routes:[{name:'MainTab'}]
                     });
 
-                }else {
+                } else {
                     navigation.navigate('SignIn');
                 }
-
-            }else {
+            } else {
                 navigation.navigate('SignIn');
             }
         }
         checkToken();
-    },[]);
+    }, []);
 
     return (
         <Container>
