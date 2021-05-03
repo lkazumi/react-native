@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -27,7 +27,7 @@ import LockIcon from '../../assets/lock.svg';
 export default () => {
 
     //Manda informações para o context
-    const { dispatch: userDispatch } = userContext(UserContext);
+    const { dispatch: userDispatch } = useContext(UserContext);
 
     //Instancia Navigation para utilizar nos metodos
     const navigation = useNavigation();
@@ -41,7 +41,7 @@ export default () => {
     const handleSignClick = async () => {
         if(nameField != '' && emailField != '' && passwordField != '') {
             let res = await Api.signUp(nameField, emailField, passwordField); //cadastra os dados
-            console.log(res);
+            
 
             if(res.token) {
                 //Salva token do usuário

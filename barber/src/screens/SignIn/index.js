@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, Image } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -75,7 +75,7 @@ export default () => {
     return (
         <Container>
             <BarberLogo width="100%" height="160" />
-
+            
             <InputArea>
                 <SignInput 
                     IconSvg={EmailIcon} 

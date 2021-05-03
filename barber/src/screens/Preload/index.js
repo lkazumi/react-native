@@ -20,6 +20,7 @@ export default () => {
         const checkToken = async () => {
             const token = await AsyncStorage.getItem('token');
             if(token) {
+                //Valida token
                 let res = await Api.checkToken(token);
                 if(res.token) {
 
