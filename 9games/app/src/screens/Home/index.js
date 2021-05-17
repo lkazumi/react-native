@@ -1,82 +1,51 @@
 import React, { useState, useEffect } from 'react';
-import { Platform } from 'react-native'; //Lib para verificar plataforma
+import { Platform, Text } from 'react-native'; //Lib para verificar plataforma
 import { useNavigation } from '@react-navigation/native';
 import { request, PERMISSIONS } from 'react-native-permissions';
-import Geolocation from '@react-native-community/geolocation';
 
-import Api from '../../Api';
+
 
 import { 
     Container,
     Scroller,
     HeaderArea,
     HeaderTitle,
-    SearchButton,
 
-    LocationArea,
-    LocationInput,
-    LocationFinder,
+    SearchArea,
+    SearchInput,
+    GameFinder,
 
     LoadingIcon,
     ListArea
 } from './style';
 
-import BarberItem from '../../components/BarberItem';
-
 import SearchIcon from '../../assets/search.svg';
-import MyLocationIcon from '../../assets/my_location.svg';
 
 
 export default () => {
 
     const navigation = useNavigation();
 
-    const [locationText, setLocationText] = useState('');
-    const [coords, setCoords] = useState(null);
+    const [searchText, setSearchText] = useState('');
     const [ loading, setLoading] = useState(false);
     const [list, setList] = useState([]); 
     
-    const handleLocationFinder = async () => {
-        setCoords(null);
-        let result = await request(
-            Platform.OS === 'ios' ?
-                PERMISSIONS.IOS.LOCATION_WHEN_IN_USE
-                :
-                PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION
-        );
-
-        if(result == 'granted') {
-
-            setLoading(true);
-            setLocationText('');
-            setList([]);
-
-            Geolocation.getCurrentPosition((info)=>{
-                setCoords(info.coords);
-                getBarbers();
-            });
-        }
+    const handleGameFinder = async () => {
+        if(searchText.toUpperCase() != "VALORANT"){
+            navigation.navigate('Search');
+        }else {
+            alert("Mostra noticia de jogo favoritado!")
+        }      
     }
 
-    const getBarbers = async () => {
+    const getGames = () => {
         setLoading(true);
-        setList([]);
-
-        let res = await Api.getBarbers();
-        if(res.error == '') {
-            if(res.loc) {
-                setLocationText(res.loc);
-            }
-            setList(res.data);
-        }else {
-            alert("Erro "+res.error);
-        }
-
-        setLoading(false);
+        //<Text>"Lista com ultimas noticias de games em geral"</Text>
+       // setLoading(false);
     }
 
     useEffect(()=>{
-        getBarbers();
+        getGames();
     },[]);
 
     return (
@@ -84,31 +53,26 @@ export default () => {
             <Scroller>
 
                 <HeaderArea> 
-                    <HeaderTitle numberOfLines={2}>Encontre o seu barbeiro favorito</HeaderTitle>
-                    <SearchButton onPress={() => navigation.navigate('Search')}>
-                        <SearchIcon width="26" height="26" fill="#FFFFFF" />
-                    </SearchButton>
+                    <HeaderTitle numberOfLines={2}>Noticias de seu interesse!</HeaderTitle>
                 </HeaderArea>
 
-                <LocationArea>
-                    <LocationInput 
-                        placeholder="Onde você esta?"
+                <SearchArea>
+                    <SearchInput 
+                        placeholder="Pesquise seu jogo favorito?"
                         placeholderTextColor="#FFFFFF"
-                        value={locationText}
-                        onChangeText={t=>setLocationText(t)}
+                        value={searchText}
+                        onChangeText={t=>setSearchText(t)}
                     />
-                    <LocationFinder onPress={handleLocationFinder}>
-                        <MyLocationIcon width="26" height="26" fill="#FFFFFF" />
-                    </LocationFinder>
-                </LocationArea>
+                    <GameFinder onPress={handleGameFinder}>
+                        <SearchIcon width="26" height="26" fill="#FFFFFF" />
+                    </GameFinder>
+                </SearchArea>
                 {loading && 
                     <LoadingIcon size="large" color="#FFFFFF" />
                 }
 
                 <ListArea>
-                    {list.map((item, k)=>(
-                        <BarberItem key={k} data={item} />
-                    ))}
+                    <Text>...</Text>
                 </ListArea>
 
             </Scroller>

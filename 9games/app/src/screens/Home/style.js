@@ -27,7 +27,7 @@ export const SearchButton = styled.TouchableOpacity`
     height: 26px;
 `;
 
-export const LocationArea = styled.View`
+export const SearchArea = styled.View`
     background-color: #4EADBE;
     height: 60px;
     border-radius: 30px;
@@ -37,12 +37,12 @@ export const LocationArea = styled.View`
     padding-right: 20px;
     margin-top: 30px;
 `;
-export const LocationInput = styled.TextInput`
+export const SearchInput = styled.TextInput`
     flex: 1;
     font-size: 16px;
     color: #FFFFFF;    
 `;
-export const LocationFinder = styled.TouchableOpacity`
+export const GameFinder = styled.TouchableOpacity`
     width: 24px;
     height: 24px;
 `;

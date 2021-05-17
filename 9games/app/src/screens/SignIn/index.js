@@ -31,8 +31,8 @@ export default () => {
     const navigation = useNavigation();
 
     //capta email e senha da tela de login 
-    const [emailField, setEmailField ] = useState('');          //suporte@b7web.com.br
-    const [passwordField, setPasswordField] = useState('');     //1234
+    const [emailField, setEmailField ] = useState('');          //user@gmail.net.br
+    const [passwordField, setPasswordField] = useState('');     //123456
 
     //Valida login de acesso
     const handleSignClick = async () => {
